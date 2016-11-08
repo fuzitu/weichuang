@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>水平导航菜单1</title>
+	<style>
+		*{				/*以后做项目开始先消除浏览器本身带的边框值*/
+			padding: 0px;
+			margin: 0px;
+		}
+		#div1{
+			width: 412px;
+		}
+		a{
+			width: 100px;
+			height: 30px;
+			background-color: red;
+			text-decoration: none;		/*清除下划线,还有其他属性,
+											如删除线,上划线..*/
+			color: #fff;
+			display: block;
+			float: left;
+			text-align: center;		/*padding:内边框*/
+			margin-right: 3px;		/*margin:外边框*/
+			line-height: 30px;    /*只有一行的情况下才可使用，上下居中对齐*/
+		}
+		a:hover{
+			background: green;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">
+		<a href="#">Link One</a>
+		<a href="#">Link Two</a>
+		<a href="#">Link Three</a>
+		<a href="#">Link Four</a>
+
+	</div>
+</body>
+</html>
