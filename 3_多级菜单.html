@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多级菜单</title>
+    <style>
+        *{
+            padding:0px;
+            margin:0px;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #menu .main-menu a{
+            display: block;
+            width: 100px;
+            height: 30px;
+            background-color: gray;
+            text-align: center;
+            line-height: 30px;
+        }
+        #menu .main-menu a:hover{
+            background-color: green;
+        }
+        .main-menu{
+            float: left;
+            margin-right:3px;
+        }
+        #menu .sub-menu a{
+            background-color: lightgray;
+            border-bottom: 1px dashed black;
+        }
+        .sub-menu{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li class="main-menu">
+            <a href="#">LinkOne</a>
+            <ul class="sub-menu">
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+            </ul>
+        </li>
+        <li class="main-menu">
+            <a href="#">LinkTwo</a>
+            <ul class="sub-menu">
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+            </ul>
+        </li>
+        <li class="main-menu">
+            <a href="#">LinkThree</a>
+            <ul class="sub-menu">
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+                <li><a href="#">sublink</a></li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        var oUL = document.getElementById("menu");
+        var aLi = oUL.getElementsByTagName("li");
+        //getElementsByTagName:只可一层一层往下写
+        for(var i=0;i<aLi.length;i++) {
+                //onmouseover:鼠标靠近元素时执行的函数
+                aLi[i].onmouseover = function () {
+                    var aLl = this.getElementsByTagName("ul")[0];
+                    aLl.style.display = "block";
+                }
+                //onmouseout:鼠标远离元素时执行的函数
+            aLi[i].onmouseout = function () {
+                var aLl = this.getElementsByTagName("ul")[0];
+                aLl.style.display = "none";
+            }
+
+        }
+    </script>
+</body>
+</html>
