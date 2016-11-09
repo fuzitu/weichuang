@@ -69,6 +69,8 @@
             if(aLi[i].className == "main-menu"){
                 aLi[i].onclick = function(){
                     var Ul = this.getElementsByTagName("ul")[0];
+                    //alert(Ul.style.display)
+                    //注意:Ul.style.display只能获取内联的display!!!
                     if(Ul.style.display == "block"){
                         Ul.style.display = "none";
                     }else{
