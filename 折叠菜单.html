@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #menu .main-menu{
+            width:100px;
+            /*height: 30px;*/
+            /*display: block;*/
+        }
+        #menu h3{
+            background-color: #000;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+        }
+        .sub-menu li{
+            width: 100px;
+            height: 30px;
+            background-color: #ccc;
+            border-bottom: 1px solid black;
+        }
+        .sub-menu a{
+            width:100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            display: block;
+        }
+        .sub-menu{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li class="main-menu">
+            <h3>Link1</h3>
+            <ul class="sub-menu">
+                <li><a href="#">subLink1</a></li>
+                <li><a href="#">subLink2</a></li>
+                <li><a href="#">subLink3</a></li>
+            </ul>
+        </li>
+        <li class="main-menu">
+            <h3>Link2</h3>
+            <ul class="sub-menu">
+                <li><a href="#">subLink1</a></li>
+                <li><a href="#">subLink2</a></li>
+                <li><a href="#">subLink3</a></li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        var oUl = document.getElementById("menu");
+        var aLi = oUl.getElementsByTagName("li");
+        for(var i = 0; i<aLi.length;i++){
+            if(aLi[i].className == "main-menu"){
+                aLi[i].onclick = function(){
+                    var Ul = this.getElementsByTagName("ul")[0];
+                    if(Ul.style.display == "block"){
+                        Ul.style.display = "none";
+                    }else{
+                        Ul.style.display = "block";
+                    }
+                }
+
+            }
+        }
+    </script>
+</body>
+</html>
