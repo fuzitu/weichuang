@@ -77,6 +77,10 @@
                         Ul.style.display = "block";
                     }
                 }
+                aLi[i].onmouseout = function(){
+                    var Ul = this.getElementsByTagName("ul")[0];
+                    Ul.style.display = "none";
+                }
 
             }
         }
