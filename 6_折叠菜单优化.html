@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折叠菜单优化</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #menu .main-menu{
+            width: 100px;
+            margin-bottom: 3px;
+            /*height: 30px;*/
+
+        }
+        #menu h3{
+            background-color: #000;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+        }
+        .sub-menu li{
+            border-bottom: 1px dashed ;
+        }
+        .sub-menu a{
+            display: block;
+            height:30px;
+            text-align: center;
+            line-height: 30px;
+            background-color: #ccc;
+        }
+        .sub-menu{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="menu">
+    <li class="main-menu">
+        <h3>Link1</h3>
+        <ul class="sub-menu">
+            <li><a href="#">subLink1</a></li>
+            <li><a href="#">subLink2</a></li>
+            <li><a href="#">subLink3</a></li>
+        </ul>
+    </li>
+    <li class="main-menu">
+        <h3>Link2</h3>
+        <ul class="sub-menu">
+            <li><a href="#">subLink1</a></li>
+            <li><a href="#">subLink2</a></li>
+            <li><a href="#">subLink3</a></li>
+        </ul>
+    </li>
+</ul>
+<script>
+    //js中,只要不是undefine/null,都是true
+    //驼峰命名规则:getElementById
+    //首字母a:array(数组)  o:object(对象)
+    var oUl = document.getElementById("menu");
+    var aH3 = oUl.getElementsByTagName("h3");
+    var aLi = oUl.getElementsByTagName("li");
+    var aUl = oUl.getElementsByTagName("ul");
+    for(var i=0; i<aH3.length; i++){
+        aH3[i].index = i;
+        aH3[i].onclick = function(){
+            //this.nextSibling.style.display = "block";  <--错误!!!
+            //兼容性问题:一些浏览器不支持nextElementSibling
+            //this.nextElementSibling.style.display = "block";
+            //可行的方法之一
+            //this.parentNode.childNodes[3].style.display = "block";
+            //console.log(this.parentNode.childNodes[3]);
+            //可行的方法之二
+            //console.log(this.index);
+            //aUl[this.index].style.display = "block";
+            //可行的方法之三,自己封装函数
+            next(this).style.display = "block";
+        };
+        aH3[i].onmouseout = function(){
+            next(this).style.display = "none";
+        }
+    }
+
+
+    function next(elem){
+        do{
+            elem = elem.nextSibling;
+        }while(elem && elem.nodeType != 1);
+        return elem;
+    }
+
+
+</script>
+</body>
+</html>

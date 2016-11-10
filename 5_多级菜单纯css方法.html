@@ -1,10 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>多级菜单css方法</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        .main-menu{
+            width:100px;
+            height:30px;
+            background-color: dimgray;
+            float: left;
+            margin-right: 3px;
+        }
+        .main-menu a{
+            width: 100px;
+            height: 30px;
+            display: block;
+            text-align: center;
+            line-height: 30px;
+        }
+        .sub-menu li{
+            width: 100px;
+            height: 30px;
+            background-color: #ccc;
+            border-bottom: 1px dashed black;
+        }
+        .sub-menu{
+            display: none;
+        }
+
+        #menu a:hover{
+            background-color: green;
+
+        }
+
+        /*此语句:IE6/IE8不支持,一般标准浏览器都支持*/
+        #menu .main-menu:hover .sub-menu{
+            /*background-color: green;*/
+            display: block;
+        }
+    </style>
 </head>
 <body>
-
+<ul id="menu">
+    <li class="main-menu">
+        <a href="#">Link1</a>
+        <ul class="sub-menu">
+            <li><a href="#">subLink1</a></li>
+            <li><a href="#">subLink2</a></li>
+            <li><a href="#">subLink3</a></li>
+        </ul>
+    </li>
+    <li class="main-menu">
+        <a href="#">Link2</a>
+        <ul class="sub-menu">
+            <li><a href="#">subLink1</a></li>
+            <li><a href="#">subLink2</a></li>
+            <li><a href="#">subLink3</a></li>
+        </ul>
+    </li>
+</ul>
 </body>
 </html>

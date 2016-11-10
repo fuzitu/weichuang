@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>className与htmlFor</title>
+</head>
+<body>
+        <label for="username" id="aa">用户名:</label>
+        <input type="text" id="username">
+        <script>
+            var oAa = document.getElementById('aa');
+            oAa.htmlfor ="xx";
+            console.log(oAa.htmlfor);
+        </script>
+</body>
+</html>
