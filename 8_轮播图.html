@@ -4,8 +4,138 @@
     <meta charset="UTF-8">
     <title>轮播图</title>
     <!--span标签是行级元素-->
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #container{
+            width: 480px;
+            height: 270px;
+            background: #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+        #img img{
+            display: none;
+        }
+        #img .selected{
+            display: block;
+        }
+        #tab{
+            position: absolute;
+            right: 30px;
+            bottom: 20px;
+        }
+        #tab li{
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            /*float: left;*/
+            display: inline-block;  /*行级块元素*/
+            color: #ffffff;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #tab li.selected{
+            background-color: orange;
+        }
+        #arrow{
+            position: absolute;
+            left: 30px;
+            bottom: 20px;
+        }
+        #arrow span{
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            float: left;
+            display: block;
+            background-color: #000;
+            margin-right: 5px;
+            text-align: center;
+            line-height: 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div id="container">
+        <ul id="tab">
+            <li class="selected">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+        <div id="img">
+            <img class="selected" src="images/1.jpg" title="image1">
+            <img src="images/2.jpg" title="image2">
+            <img src="images/3.jpg" title="image3">
+            <img src="images/4.jpg" title="image4">
+        </div>
+        <div id="arrow">
+            <span id="prev">&lt;</span>
+            <span id="next">&gt;</span>
+        </div>
+    </div>
+    <script>
+        var oContainer = document.getElementById("container");
+        var aLi = oContainer.getElementsByTagName("li");
+        var aImg = oContainer.getElementsByTagName("img");
+        var oNext = document.getElementById("next");
+        var oPrev = document.getElementById("prev");
+        var iNow = 0;
+        var timer;
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].index = i; //对i的索引（很重要）
+            aLi[i].onmouseover = function(){
+                changeImg(this.index);
+            }
+        }
 
+        function changeImg(index){
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].className = "";
+                aImg[aLi[i].index].className = "";
+            }
+            aLi[index].className = "selected";
+            aImg[aLi[index].index].className = "selected";
+            iNow = index;
+        }
+
+        oNext.onclick = function(){
+            iNow++;
+            iNow = iNow%aLi.length;
+            changeImg(iNow);
+        }
+        oPrev.onclick = function(){
+            iNow--;
+            if(iNow == -1){
+                iNow = aLi.length - 1;
+            }
+            changeImg(iNow);
+        }
+
+        timer = setInterval(function(){
+            oNext.onclick();
+        },1000);
+
+        oContainer.onmouseover = function(){
+            clearInterval(timer);
+        };
+        oContainer.onmouseout = function(){
+            timer = setInterval(function(){
+                oNext.onclick();
+            },1000);
+        };
+    </script>
 </body>
 </html>
