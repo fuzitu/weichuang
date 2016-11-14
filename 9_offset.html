@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offset</title>
+    <style>
+        #div1{
+            width:200px;
+            height: 200px;
+            background-color: red;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        //offsetWidth   内边距和边框,不包括margin(外边距)
+        //offsetHeight
+        //offsetLeft   离他最近的祖先元素
+        //offsetTop    离他最近的祖先元素
+        //offsetParent
+        var oDiv = document.getElementById("div1");
+        //console.log(oDiv.style.width);
+        console.log(oDiv.offsetWidth);   //默认是数值,没加px
+        console.log(oDiv.offsetHeight);
+        console.log(oDiv.offsetParent);
+    </script>
+</body>
+</html>
