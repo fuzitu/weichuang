@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #drag{
+            width: 200px;
+            height: 200px;
+            background-color: #ff0000;
+            cursor: pointer;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!--<h1 onselectstart="return false">hhhhhhhhhhhhhhhh</h1>-->
+    <h1>hhhhhhhh</h1>
+    <div id="drag"></div>
+    <script>
+        //IE6没有控制台,无法使用console.log();,可以用alert();
+        //如果函数需要立即调用,之后不需要了,就要采用立即调用
+        //会节省很多空间
+        //不然会造成全局污染
+        //例子:window.aa
+        //函数立即调用
+        //()();
+
+        (function(){
+            var oDrag = document.getElementById("drag");
+            oDrag.onmousedown = function(e){
+                //e有兼容性问题
+                e = e || window.event;  //e事件对象,解决兼容性问题
+                //var target = e.target || window.event.srcElement;
+                //console.log(e.target);
+                //console.log(target);
+                //console.log(e.clientX + "," + e.clientY);
+                var iDisX = e.clientX - oDrag.offsetLeft;
+                var iDisY = e.clientY - oDrag.offsetTop;
+//                oDrag.style.left = "";
+//                oDrag.style.top = "";
+                document.onmousemove = function(e){
+                    e = e || window.event;
+                    var left = e.clientX - iDisX;
+                    var top = e.clientY - iDisY;
+                    oDrag.style.left = left + "px";
+                    oDrag.style.top = top + "px";
+                    return false;   //h1不能被选中
+                };
+            };
+            oDrag.onmouseup = function(){
+                document.onmousemove = null;
+            };
+
+
+
+
+        })();
+    </script>
+</body>
+</html>
+<!--
+event事件(三要素):
+1.事件源 谁发起的
+2.事件处理函数
+3.事件对象
+
+-->
+<!--空字符串,0,undefine,null->是false
+if(""){
+    console.log(true);
+    }else{
+    console.log(false);
+}-->

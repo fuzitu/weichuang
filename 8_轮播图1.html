@@ -20,12 +20,13 @@
             background-color: #999999;
             margin: 100px auto;
             position: relative;
-            /*overflow: hidden;*/
+            overflow: hidden;
         }
         #container #tab{
             position: absolute;
             right: 10px;
             bottom: 20px;
+            z-index: 1;
         }
         #container #tab li{
             width: 20px;
@@ -41,15 +42,15 @@
         #container #tab li.selected{
             background-color: orange;
         }
+        #container #content{
+            position: absolute;
+            left: 0;
+        }
         #content img{
-            /*width: 2100px;*/
-            /*float: left;*/
-            display: none;
+            width: 480px;
+            height: 270px;
+            float: left;
         }
-        #content img.selected{
-            display: block;
-        }
-
         #container #span{
             position: absolute;
             left: 10px;
@@ -77,62 +78,78 @@
             <li>4</li>
         </ul>
         <div id="content">
-            <img src="images/1.jpg" class="selected" alt="img">
+            <img src="images/1.jpg" alt="img">
             <img src="images/2.jpg" alt="img">
             <img src="images/3.jpg" alt="img">
             <img src="images/4.jpg" alt="img">
         </div>
-
         <div id="span">
             <span id="prev">&lt;</span>
             <span id="next">&gt;</span>
         </div>
     </div>
-
+    <script src="./8_轮播图1.js"></script>
     <script>
-        var oContainer = document.getElementById("container");
-        var aLi = oContainer.getElementsByTagName("li");
-        var aImg = oContainer.getElementsByTagName("img");
-        var oContent = document.getElementById("content");
-        var oPrev = document.getElementById("prev");
-        var oNext = document.getElementById("next");
-        var iNow = 0;   //记录当前显示激活的索引
-        for(var i=0; i<aLi.length; i++){
-            aLi[i].index = i;  //索引
-            aLi[i].onmouseover = function(){
-                changImg(this.index);
-            };
-        }
-
-        function changImg(index){
-            //console.log(this);
+        window.onload = function(){
+            var oContainer = document.getElementById("container");
+            var aLi = oContainer.getElementsByTagName("li");
+            var aImg = oContainer.getElementsByTagName("img");
+            var oContent = document.getElementById("content");
+            var oPrev = document.getElementById("prev");
+            var oNext = document.getElementById("next");
+            var iNow = 0;   //记录当前显示激活的索引
+            var timer;
+            //  .style.width:此方法获取的是内联样式
+            oContent.style.width = aImg[0].offsetWidth * aImg.length + "px";
+            //console.log(oContent.style.width);
+            //console.log(oContent.style.left);
             for(var i=0; i<aLi.length; i++){
-                aLi[i].className = "";
-                aImg[i].className = "";
+                aLi[i].index = i;  //索引
+                aLi[i].onmouseover = function(){
+                    changImg(this.index);
+                    iNow = this.index;
+                };
             }
-            //ele.className = "selected";
-            aLi[index].className = "selected";
-            aImg[index].className = "selected";
-            iNow +=1;
+            function changImg(index){
+                //console.log(this);
+                for(var i=0; i<aLi.length; i++){
+                    aLi[i].className = "";
+                    //aImg[i].className = "";
+                }
+                //ele.className = "selected";
+                aLi[index].className = "selected";
+                //aImg[index].className = "selected";
+                animate(oContent,{left:-aImg[0].offsetWidth * index});
+                //oContent.style.left = -aImg[0].offsetWidth * index + "px";
+                //console.log(oContent.style.left);
+            }
+            oNext.onclick = function(){
+                iNow ++;
+                iNow = iNow%aLi.length;
+                changImg(iNow);
+            };
+            oPrev.onclick = function(){
+                iNow--;
+                if(iNow == -1){
+                    iNow = aLi.length - 1;
+                }
+                changImg(iNow);
+            };
+
+            timer = setInterval(function(){
+                oNext.onclick();
+            },1000);
+            oContainer.onmouseover = function(){
+                clearInterval(timer);
+            };
+            oContainer.onmouseout = function(){
+                timer = setInterval(function(){
+                    oNext.onclick();
+                },1000);
+            };
+            //oContent.style.width = oContainer.offsetWidth * (aImg.length + 1) + "px";
+            //console.log(oContent.offsetWidth);
         }
-
-        oNext.onclick = function(){
-            iNow ++;
-            iNow = iNow%aLi.length;
-            changImg(iNow);
-        };
-        oPrev.onclick = function(){
-            iNow--;
-            if(iNow == -1){
-                iNow = aLi.length - 1;
-            }
-            changImg(iNow);
-        };
-
-
-
-        //oContent.style.width = oContainer.offsetWidth * (aImg.length + 1) + "px";
-        //console.log(oContent.offsetWidth);
     </script>
 </body>
 </html>

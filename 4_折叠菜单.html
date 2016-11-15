@@ -46,7 +46,8 @@
 <body>
     <ul id="menu">
         <li class="main-menu">
-            <h3>Link1</h3>
+            <!--onselectstart有兼容性问题,IE下没有效果-->
+            <h3 onselectstart="return false;">Link1</h3>
             <ul class="sub-menu">
                 <li><a href="#">subLink1</a></li>
                 <li><a href="#">subLink2</a></li>
@@ -54,7 +55,7 @@
             </ul>
         </li>
         <li class="main-menu">
-            <h3>Link2</h3>
+            <h3 onselectstart="return false;">Link2</h3>
             <ul class="sub-menu">
                 <li><a href="#">subLink1</a></li>
                 <li><a href="#">subLink2</a></li>
@@ -76,7 +77,7 @@
                     }else{
                         Ul.style.display = "block";
                     }
-                }
+                };
                 aLi[i].onmouseout = function(){
                     var Ul = this.getElementsByTagName("ul")[0];
                     Ul.style.display = "none";

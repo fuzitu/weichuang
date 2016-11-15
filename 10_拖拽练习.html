@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽练习</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #content{
+            width: 200px;
+            height: 200px;
+            background: #00ff00;
+            position: relative;
+            cursor: pointer;
+            /*margin:50px auto;*/
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>xxxxxxxxxxx</h1>
+    <div id="content"></div>
+    <script>
+        //函数立即调用:节省全局变量空间()();
+        (function(){
+            var oContent = document.getElementById("content");
+            //console.log(oContent);
+            oContent.onmousedown = function(e){
+                e = e || window.event;
+                //console.log(e);
+                var iX = e.clientX - oContent.offsetLeft;
+                var iY = e.clientY - oContent.offsetTop;
+
+                document.onmousemove = function(e){
+                    e = e || window.event;
+                    var left = e.clientX - iX;
+                    var top = e.clientY - iY;
+                    oContent.style.left = left + "px";
+                    oContent.style.top = top + "px";
+                    return false;
+                };
+            };
+            oContent.onmouseup = function(){
+                document.onmousemove = null;
+            };
+        })();
+
+    </script>
+</body>
+</html>
