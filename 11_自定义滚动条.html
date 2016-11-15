@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #container{
+            width: 300px;
+            height: 500px;
+            background-color: #ccc;
+            overflow: hidden;
+            position: relative;
+        }
+        #content{
+            width: 280px;
+            position: absolute;
+        }
+        #scroll-bar{
+            width: 20px;
+            height: 500px;
+            background-color: #eee;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        #scroll-btn{
+            width: 20px;
+            height: 20px;
+            background-color: #ff0000;
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<!--
+    在html中设置的id或
+    者class要有实际意义
+    ,不要用aa,bb来代替
+-->
+    <div id="container">
+        <div id="content">呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅呢张发奎给你说的SDK哥SDK哥十多个考试的高帅富东方红到付款哈DJ返回开单肺结核到付款行级到付款哈多级反馈黄金时代关键是帝国时代SD开关机十多个山东高考伤筋动骨数控刀具哥SDK哥结舌杜口攻击速度空格就是看到哥就是看到哥结舌杜口工具</div>
+        <div id="scroll-bar">
+            <div id="scroll-btn"></div>
+        </div>
+    </div>
+<script>
+    (function(){
+        var oContainer = document.getElementById("container");
+        var oContent = document.getElementById("content");
+        var oScrollBtn = document.getElementById("scroll-btn");
+        var oScrollBar = document.getElementById("scroll-bar");
+        //指鼠标按下时执行的函数
+        oScrollBtn.onmousedown = function(e){
+            e = e || window.event;
+            var iScrollY = e.clientY - oScrollBtn.offsetTop;
+            //console.log(iScrollY);
+            //指鼠标移动时执行的函数
+            document.onmousemove = function(e){
+                e = e || window.event;
+                var top = e.clientY - iScrollY;
+                if(top < 0){
+                    top = 0;
+                }
+                var btnMaxH = oScrollBar.offsetHeight - oScrollBtn.offsetHeight;
+                if(top > btnMaxH){
+                    top = btnMaxH;
+                }
+                oScrollBtn.style.top = top + "px";
+                console.log(oScrollBtn.style.top);
+                var fCoefficient = top / oContainer.offsetHeight;
+                console.log(fCoefficient);
+                oContent.style.top = -fCoefficient * (oContent.offsetHeight - oContainer.offsetHeight) + "px";
+
+
+                return false;
+            };
+        };
+            //鼠标松开时执行的函数
+            document.onmouseup = function(){
+                document.onmousemove = null;
+            };
+
+
+
+
+    })();
+</script>
+</body>
+</html>
