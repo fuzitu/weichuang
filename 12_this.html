@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this</title>
+    <style>
+        li{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+        <li>004</li>
+    </ul>
+    <script>
+        //this表示谁发起的这个事件,this就指代谁
+        //下面的第一个例子是aLi[i]发起的,所以this
+        //指代aLi[i]
+        //第二个相应的是指代oUl
+        var oUl = document.getElementById("menu");
+        var aLi = document.getElementsByTagName("li");
+        //console.log(typeof aLi);
+        //console.log(typeof(aLi));
+
+
+        //var xLi = oUl.children;
+        //console.log(xLi);
+
+        //数组的typeof是object,切记切记!!!面试常问
+//        for(var i=0; i<aLi.length; i++){
+//            aLi[i].onclick = function(){
+//                console.log(this);
+//            };
+//        }
+        oUl.onclick = function(){
+            console.log(this);
+        };
+
+        //默认情况下this指window对象
+        //console.log(this);
+
+//        var a = 5;
+//        console.log(this.a);
+
+    </script>
+</body>
+</html>

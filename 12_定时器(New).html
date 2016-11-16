@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器</title>
+</head>
+<body>
+    <!--
+    js中有些js对象:
+    Math
+    Array
+    ...
+
+
+    -->
+    <script>
+        var i = 0;
+        //Math.random()  0 <= x < 1
+//        var timer = setInterval(function(){
+//
+//            i++;
+//            if(i == 5){
+//                clearInterval(timer);
+//            }
+//            console.log(i);
+//            //console.log(Math.random());
+//        }, 500);
+        //console.log(timer);
+        //console.log(typeof timer);
+        //定时器返回的是一个number类型的值
+
+        //相当于定时炸弹,等待时间后执行
+//        setTimeout(function(){
+//            console.log(Math.random());
+//        }, 500);
+
+        //面试常问
+        //一个进程有多个线程
+        //js是单线程的    -->任务排队,排成一个队列,一个一个执行
+        //但浏览器是多线程的
+        //当后面的时间为零时,指的是跳出这个队列
+        setTimeout(function(){
+            console.log(1);
+        }, 0);
+        console.log(2);
+        console.log(3);
+    </script>
+</body>
+</html>

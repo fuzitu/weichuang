@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>style(New)</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <script>
+        var oDiv = document.getElementById("div1");
+        //此方式获取的是内联样式
+        console.log(oDiv.style.width);  //取值和赋值,此为取值
+        //涉及到兼容性问题,考虑封装函数
+
+        //currentStyle:当前的样式,此语法在IE8中能够支持,但
+        //标准浏览器不支持
+        //console.log(oDiv.currentStyle.backgroundColor);
+
+        //此方法标准浏览器支持,但IE8不支持
+        //console.log(getComputedStyle(oDiv, null).background);
+
+        var aa = getStyle(oDiv, "backgroundColor");
+        alert(aa);
+
+        /*获取相应的对象下面的属性的值*/
+        function getStyle(elem,prop){
+            if(elem.currentStyle){
+                return elem.currentStyle[prop];
+            }else if(getComputedStyle){
+                return getComputedStyle(elem, null)[prop];
+            }
+        }
+
+
+        /*函数扩展*/
+//        function aa(a,b){
+//            return a + b;
+//        }
+//        var result = aa(3,3);
+//        console.log(result);
+//
+//        function bb(a,b,c){
+//            console.log(a);
+//            console.log(b);
+//            console.log(c);
+//
+//        }
+//        //bb(1, ,2);    此方法错误
+//        bb(1,2);
+//
+//        function cc(a,b){
+//            console.log(a);
+//            console.log(arguments[0]);
+//        }
+//        cc(1);
+    </script>
+</body>
+</html>
