@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head id="head">
+    <meta charset="UTF-8">
+    <title>event(事件冒泡和事件捕获)</title>
+</head>
+<style>
+    #div1{
+        width: 400px;
+        height: 400px;
+        background: #00ff00;
+    }
+    #div2{
+        width: 300px;
+        height: 300px;
+        background: #ff0000;
+    }
+    #div3{
+        width: 200px;
+        height: 200px;
+        background: #0000ff;
+    }
+</style>
+<body id="body">
+    <div id="div1">
+        <div id="div2">
+            <div id="div3"></div>
+        </div>
+    </div>
+    <script>
+        var oDiv1 = document.getElementById("div1");
+        var oDiv2 = document.getElementById("div2");
+        var oDiv3 = document.getElementById("div3");
+        var oBody = document.getElementById("body");
+        var oHtml = document.getElementById("html");
+        //事件可以传播的,弹出顺序div3>div2>div1>body>html
+//        oDiv1.onclick = function(){
+////            alert(oDiv1.innerHTML);
+//            alert("div1");
+//        };
+//        oDiv1.onclick = function(){
+//            //弹出div11而不是div1
+//            alert("div11");
+//        };
+//        oDiv2.onclick = function(){
+////            alert(oDiv2.innerHTML);
+//            alert("div2");
+//        };
+//        oDiv3.onclick = function(){
+////            alert(oDiv3.innerHTML);
+//            alert("div3");
+//        };
+//        oBody.onclick = function(){
+////            alert(oDiv3.innerHTML);
+//            alert("body");
+//        };
+//        oHtml.onclick = function(){
+////            alert(oDiv3.innerHTML);
+//            alert("html");
+//        };
+
+        //三个参数,绑定事件不需要加on,例如click,mouseover...
+        //不过IE不支持此语句,标准浏览器支持
+//        oDiv1.addEventListener("click", function(){
+//            alert("11");
+//        });
+        oDiv1.addEventListener("click", function(){
+            alert("div1");
+            //this是oDiv1
+            //false是事件冒泡:从里到外
+            //true是事件捕获:从外到里
+            //一般不会用到事件捕获
+            //事件的顺序,先捕获,后冒泡
+        }, false);
+        oDiv2.addEventListener("click", function(){
+            alert("div2");
+            //this是oDiv1
+        }, false);
+        oDiv3.addEventListener("click", function(e){
+            alert("div3");
+            //阻止时间传播,标准浏览器用的是stopPropagation
+            e.stopPropagation();
+            //this是oDiv1
+        }, false);
+//        //两个都会弹出11>22
+//        oDiv1.addEventListener("click", function(){
+//            alert("22");
+//        });
+
+        //此语句IE下支持,但要加on,标准浏览器不支持此语句
+//        oDiv1.attachEvent("onclick", function(){
+//            alert("33")
+//        });
+        //IE下弹出是44>33,是它的bug执行顺序是反的
+//        oDiv1.attachEvent("onclick", function(){
+//            alert("44")
+//        });
+//        oDiv1.attachEvent("onclick", function(){
+//            alert(this);
+                //this绑定错误,是window
+            //IE中阻止事件传播用的cancelBubble
+//            window.event.cancelBubble = true;
+//        });
+    </script>
+</body>
+</html>

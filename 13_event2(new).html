@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="btn">add</button>
+    <ul id="ul1">
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+        <li>004</li>
+    </ul>
+<script>
+    var oBtn = document.getElementById("btn");
+    var aLi = document.getElementsByTagName("li");
+    var oUl = document.getElementById("ul1");
+//    oUl.addEventListener("click", function(e){
+    //        var target = e.target || window.event.srcElement;
+    //        alert(target.innerHTML);
+    //    });
+    oUl.onclick = function(e){
+        var target = e.target || window.event.srcElement;
+        alert(target.innerHTML);
+    };
+
+    oBtn.addEventListener("click", function(){
+        var oLi = document.createElement("li");
+        oLi.innerHTML = Math.random();
+        oUl.appendChild(oLi);
+    });
+</script>
+</body>
+</html>
