@@ -113,63 +113,66 @@
 	</div>
 	<script src="jslib.js"></script>
 	<script>
-		var oContainer = document.getElementById("container");
-		var aImg = oContainer.getElementsByTagName("img");
-		var aLi = oContainer.getElementsByTagName("li");
-		var oUl = document.getElementById("sub-tab");
-		var oContent = document.getElementById("content");
-		var oSpan = document.getElementById("span");
-		var oPrev = document.getElementById("prev");
-		var oNext = document.getElementById("next");
-		var iZIndex = 5;
-		var iNow = 0;
-		for(var i=0; i<aLi.length; i++){
-			aLi[i].index = i;
-			aLi[i].onmouseover = function(e){
-				e = e || window.event;
+		window.onload = function(){
+			var oContainer = document.getElementById("container");
+			var aImg = oContainer.getElementsByTagName("img");
+			var aLi = oContainer.getElementsByTagName("li");
+			var oUl = document.getElementById("sub-tab");
+			var oContent = document.getElementById("content");
+			var oSpan = document.getElementById("span");
+			var oPrev = document.getElementById("prev");
+			var oNext = document.getElementById("next");
+			var iZIndex = 5;
+			var iNow = 0;
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].index = i;
+				aLi[i].onmouseover = function(e){
+					e = e || window.event;
+					for(var i=0; i<aLi.length; i++){
+						aLi[i].className = "";
+					}
+					aLi[this.index].className = "selected";
+					var oImg = aImg[this.index];
+					oImg.style.opacity = 0;
+					oImg.style.filter = "alpha(opacity=0)";
+					oImg.style.zIndex = ++iZIndex;
+					animate(oImg,{opacity : 100});
+					iNow = this.index;
+					// console.log(iNow);
+				};
+			}
+			oNext.onclick = function(){
 				for(var i=0; i<aLi.length; i++){
 					aLi[i].className = "";
 				}
-				aLi[this.index].className = "selected";
-				var oImg = aImg[this.index];
+				iNow++;
+				iNow = iNow%aImg.length;
+				// console.log(iNow);
+				aLi[iNow].className = "selected";
+				var oImg = aImg[iNow];
 				oImg.style.opacity = 0;
-				oImg.style.filter = "alpha(opacity=0)";
+				//兼容IE
+				oImg.style.filter = "alpha(opacity = 0)";
 				oImg.style.zIndex = ++iZIndex;
 				animate(oImg,{opacity : 100});
-				iNow = this.index;
-				// console.log(iNow);
+			};
+			oPrev.onclick = function(){
+				for(var i=0; i<aLi.length; i++){
+					aLi[i].className = "";
+				}
+				iNow--;
+				if(iNow == -1){
+					iNow = aImg.length - 1;
+				}
+				aLi[iNow].className = "selected";
+				var oImg = aImg[iNow];
+				oImg.style.opacity = 0;
+				oImg.style.filter = "alpha(opacity = 0)";
+				oImg.style.zIndex = ++iZIndex;
+				animate(oImg,{opacity : 100});
 			};
 		}
-		oNext.onclick = function(){
-			for(var i=0; i<aLi.length; i++){
-				aLi[i].className = "";
-			}
-			iNow++;
-			iNow = iNow%aImg.length;
-			// console.log(iNow);
-			aLi[iNow].className = "selected";
-			var oImg = aImg[iNow];
-			oImg.style.opacity = 0;
-			//兼容IE
-			oImg.style.filter = "alpha(opacity = 0)";
-			oImg.style.zIndex = ++iZIndex;
-			animate(oImg,{opacity : 100});
-		};
-		oPrev.onclick = function(){
-			for(var i=0; i<aLi.length; i++){
-				aLi[i].className = "";
-			}
-			iNow--;
-			if(iNow == -1){
-				iNow = aImg.length - 1;
-			}
-			aLi[iNow].className = "selected";
-			var oImg = aImg[iNow];
-			oImg.style.opacity = 0;
-			oImg.style.filter = "alpha(opacity = 0)";
-			oImg.style.zIndex = ++iZIndex;
-			animate(oImg,{opacity : 100});
-		};
+
 	</script>
 </body>
 </html>
