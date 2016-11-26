@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>水平导航菜单</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #tab #menu li{
+            width: 100px;
+            height: 30px;
+            background: #ff0000;
+            margin-right: 5px;
+            cursor: pointer;
+            line-height: 30px;
+            color: #ffffff;
+            text-align: center;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <ul id="menu">
+            <li>Link One</li>
+            <li>Link Two</li>
+            <li>Link Three</li>
+            <li>Link Four</li>
+        </ul>
+    </div>
+    <script>
+        var oUl = document.getElementById("menu");
+        var aLi = oUl.getElementsByTagName("li");
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].onmouseover = function(){
+                this.style.background = "#00ff00";
+            };
+            aLi[i].onmouseout = function(){
+                this.style.background = "#ff0000";
+            };
+        }
+    </script>
+</body>
+</html>

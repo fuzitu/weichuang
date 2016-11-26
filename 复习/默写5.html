@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多级菜单</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #tab .menu{
+            width: 100px;
+            height: 123px;
+            float: left;
+            margin-right: 5px;
+        }
+        #tab .menu a{
+            width: 100px;
+            height: 30px;
+            display: block;
+            background: #999999;
+            text-align: center;
+            line-height: 30px;
+        }
+        #tab .menu a:hover{
+            background: #00ff00;
+        }
+        /*#tab .menu a:hover li{*/
+            /*display: block;*/
+            /*!*background: red;*!*/
+        /*}*/
+        #tab .menu li{
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #cccccc;
+            border-bottom: 1px dashed #000000;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <ul class="menu">
+            <a href="">Link One</a>
+            <li>sublink</li>
+            <li>sublink</li>
+            <li>sublink</li>
+        </ul>
+        <ul class="menu">
+            <a href="">Link Two</a>
+            <li>sublink</li>
+            <li>sublink</li>
+            <li>sublink</li>
+        </ul>
+        <ul class="menu">
+            <a href="">Link Three</a>
+            <li>sublink</li>
+            <li>sublink</li>
+            <li>sublink</li>
+        </ul>
+    </div>
+    <script>
+        var oTab = document.getElementById("tab");
+        var aUl = oTab.getElementsByTagName("ul");
+        var aLi = oTab.getElementsByTagName("li");
+        var aA = oTab.getElementsByTagName("a");
+//        console.log(aA);
+//        console.log(aUl[0].parentNode);
+//        console.log(aLi);
+        for(var i=0; i<aA.length; i++){
+            aA[i].index = i;
+            aA[i].onmouseover = function(){
+//                console.log(this.index);
+//                console.log(aLi[this.index].parentNode);
+//                console.log(aA[this.index].parentNode.children);
+                var aChildren = aA[this.index].parentNode.children;
+//                console.log(aA[this.index].parentNode.childNodes);
+                for(var i=1; i<aChildren.length; i++){
+                    aChildren[i].style.display = "block";
+                }
+//                aLi[this].parentNode.children.style.display = "block";
+            };
+
+            aUl.onmouseout = function(){
+                var aChildren = aA[this].parentNode.children;
+                console.log(aChildren);
+                for(var i=1; i<aChildren.length; i++){
+                    aChildren[i].style.display = "none";
+                }
+            };
+        }
+    </script>
+</body>
+</html>
