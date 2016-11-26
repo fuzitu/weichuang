@@ -73,6 +73,7 @@
         var aUl = oTab.getElementsByTagName("ul");
         var aLi = oTab.getElementsByTagName("li");
         var aA = oTab.getElementsByTagName("a");
+        //console.log(this);
 //        console.log(aA);
 //        console.log(aUl[0].parentNode);
 //        console.log(aLi);
@@ -89,7 +90,6 @@
                 }
 //                aLi[this].parentNode.children.style.display = "block";
             };
-
             aUl.onmouseout = function(){
                 var aChildren = aA[this].parentNode.children;
                 console.log(aChildren);
