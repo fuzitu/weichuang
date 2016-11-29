@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多级菜单</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #tab .menu{
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #tab .menu li{
+            width: 100px;
+            height: 30px;
+            background: #cccccc;
+            line-height: 30px;
+            text-align: center;
+            border-bottom: 1px dashed #000000;
+            cursor: pointer;
+        }
+        #tab .menu a{
+            width: 100px;
+            height: 30px;
+            display: block;
+            background: #999999;
+            line-height: 30px;
+            text-align: center;
+        }
+        #tab .menu a:hover{
+            background: #00ff00;
+        }
+        #tab .sub-menu li:hover{
+            background: #555555;
+        }
+        #tab .menu .sub-menu{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="tab">
+        <li class="menu">
+            <a href="">Link One</a>
+            <ul class="sub-menu">
+                <li>sublink</li>
+                <li>sublink</li>
+                <li>sublink</li>
+            </ul>
+        </li>
+        <li class="menu">
+            <a href="">Link Two</a>
+            <ul class="sub-menu">
+                <li>sublink</li>
+                <li>sublink</li>
+                <li>sublink</li>
+            </ul>
+        </li>
+        <li class="menu">
+            <a href="">Link Three</a>
+            <ul class="sub-menu">
+                <li>sublink</li>
+                <li>sublink</li>
+                <li>sublink</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        var oTab = document.getElementById("tab");
+        var aUl = oTab.getElementsByTagName("ul");
+        var aLi = oTab.getElementsByTagName("li");
+        console.log(aUl);
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].index = i;
+            aLi[i].onmouseover = function(){
+                console.log(this.index);
+                var oSubMenu = this.children[1];
+//                console.log(oSubMenu);
+                oSubMenu.style.display = "block";
+            };
+            aLi[i].onmouseout = function(){
+                var oSbuMenu = this.children[1];
+                oSbuMenu.style.display = "none";
+            };
+        }
+    </script>
+</body>
+</html>

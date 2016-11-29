@@ -70,12 +70,12 @@
         var aLi = oUL.getElementsByTagName("li");
         //getElementsByTagName:只可一层一层往下写
         for(var i=0;i<aLi.length;i++) {
-                //onmouseover:鼠标靠近元素时执行的函数
-                aLi[i].onmouseover = function () {
-                    var aLl = this.getElementsByTagName("ul")[0];
-                    aLl.style.display = "block";
-                };
-                //onmouseout:鼠标远离元素时执行的函数
+            //onmouseover:鼠标靠近元素时执行的函数
+            aLi[i].onmouseover = function () {
+                var aLl = this.getElementsByTagName("ul")[0];
+                aLl.style.display = "block";
+            };
+            //onmouseout:鼠标远离元素时执行的函数
             aLi[i].onmouseout = function () {
                 var aLl = this.getElementsByTagName("ul")[0];
                 aLl.style.display = "none";

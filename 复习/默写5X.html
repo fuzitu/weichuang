@@ -51,21 +51,21 @@
     <div id="tab">
         <ul class="menu">
             <a href="">Link One</a>
-            <li>sublink</li>
-            <li>sublink</li>
-            <li>sublink</li>
+            <li id="1">sublink</li>
+            <li id="2">sublink</li>
+            <li id="3">sublink</li>
         </ul>
         <ul class="menu">
             <a href="">Link Two</a>
-            <li>sublink</li>
-            <li>sublink</li>
-            <li>sublink</li>
+            <li id="4">sublink</li>
+            <li id="5">sublink</li>
+            <li id="6">sublink</li>
         </ul>
         <ul class="menu">
             <a href="">Link Three</a>
-            <li>sublink</li>
-            <li>sublink</li>
-            <li>sublink</li>
+            <li id="7">sublink</li>
+            <li id="8">sublink</li>
+            <li id="9">sublink</li>
         </ul>
     </div>
     <script>
@@ -89,11 +89,18 @@
                 }
 //                aLi[this].parentNode.children.style.display = "block";
             };
-            aUl.onmouseout = function(){
-                var aChildren = aA[this].parentNode.children;
-                console.log(aChildren);
-                for(var i=1; i<aChildren.length; i++){
-                    aChildren[i].style.display = "none";
+        }
+        for(var i=0; i<aUl.length; i++){
+            aUl[i].index = i;
+            aUl[i].onmouseout = function(){
+//                console.log(this);
+//                console.log(this.index);
+                var oChildren = this.parentNode.children[this.index];
+                var aLiAgain = oChildren.getElementsByTagName("li");
+                console.log(aLiAgain);
+//                aChildren[this.index].style.display = "none";
+                for(var i=0; i<aLiAgain.length; i++){
+                    aLiAgain[i].style.display = "none";
                 }
             };
         }

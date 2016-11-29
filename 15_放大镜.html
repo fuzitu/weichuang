@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		ul,ol{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+		img{
+			margin: 0;
+		}
+		#container #small-img{
+			width: 300px;
+			height: 300px;
+			float: left;
+			position: relative;
+		}
+		#container #small-img #drag{
+			width: 100px;
+			height: 100px;
+			background: #ccc;
+			opacity: 0;
+			filter: alpha(opacity=0);
+			position: absolute;
+			/*left: 0;
+			top: 0;*/
+		}
+		#container #big-img{
+			width: 300px;
+			height: 300px;
+			overflow: hidden;
+			float: left;
+			position: relative;
+			left: 0;
+			top: 0;
+			display: none;
+		}
+		#container #big-img img{
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="small-img">
+			<div id="drag"></div>
+			<img src="images/enlarge1.jpg" alt="small">
+		</div>
+		<div id="big-img">
+			<img src="images/enlarge2.jpg" alt="big">
+		</div>
+	</div>
+	<script>
+		var oSmallImg = document.getElementById("small-img");
+		var oBigImg = document.getElementById("big-img");
+		var oDrag = document.getElementById("drag");
+		var aImg = oBigImg.getElementsByTagName("img")[0];
+		// console.log(oDrag);
+		oSmallImg.onmouseover = function(){
+			oDrag.style.opacity = 0.5;
+			oDrag.style.filter = "alpha(opacity=50)";
+			oBigImg.style.display = "block";
+		};
+		oSmallImg.onmouseout = function(){
+			oDrag.style.opacity = 0;
+			oDrag.style.filter = "alpha(opacity=0)";
+			oBigImg.style.display = "none";
+		};
+		oSmallImg.onmousemove = function(e){
+			e = e || window.event;
+			var left = e.clientX - oDrag.offsetWidth / 2;
+			// console.log(left);
+			var top = e.clientY - oDrag.offsetHeight / 2;
+			var leftMax = oSmallImg.offsetWidth - oDrag.offsetWidth;
+			var topMax = oSmallImg.offsetHeight - oDrag.offsetHeight;
+			if(left <= 0){
+				left =0;
+			}
+			if(left >= leftMax){
+				left = leftMax;
+			}
+			if(top <=0){
+				top =0;
+			}
+			if(top >= topMax){
+				top = topMax;
+			}
+			oDrag.style.left = left + "px";
+			oDrag.style.top = top + "px";
+			var scaleX = left / leftMax;
+			var scaleY = top / topMax;
+			// console.log(scaleX);
+			// console.log(scaleY);
+			aImg.style.left = -oBigImg.offsetWidth * scaleX + "px";
+			aImg.style.top = -oBigImg.offsetHeight * scaleY + "px";
+			// console.log(oDrag.offsetLeft);
+			// console.log(top);
+		};
+	</script>
+</body>
+</html>

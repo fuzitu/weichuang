@@ -124,6 +124,7 @@
 			var oNext = document.getElementById("next");
 			var iZIndex = 5;
 			var iNow = 0;
+			var timer;
 			for(var i=0; i<aLi.length; i++){
 				aLi[i].index = i;
 				aLi[i].onmouseover = function(e){
@@ -170,6 +171,17 @@
 				oImg.style.filter = "alpha(opacity = 0)";
 				oImg.style.zIndex = ++iZIndex;
 				animate(oImg,{opacity : 100});
+			};
+			timer = setInterval(function(){
+				oNext.onclick();
+			}, 1500);
+			oContainer.onmouseover = function(){
+				clearInterval(timer);
+			};
+			oContainer.onmouseout = function(){
+				timer = setInterval(function(){
+				oNext.onclick();
+			}, 1500);
 			};
 		}
 

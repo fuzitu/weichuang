@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图简单动画</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		ul,ol{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+		#container{
+			width: 1351px;
+			height: 431px;
+			/*overflow: hidden;*/
+			position: relative;
+			/*margin: 0 auto;*/
+			overflow: hidden;
+			margin-top: 50px;
+			cursor: pointer;
+		}
+		#container #tab{
+			position: absolute;
+			right: 50px;
+			bottom: 50px;
+			z-index: 1;
+		}
+		#container #tab #sub-tab li{
+			width: 30px;
+			height: 30px;
+			background: #ccc;
+			margin-right: 5px;
+			text-align: center;
+			line-height: 30px;
+			float: left;
+			cursor: pointer;
+		}
+		/*#container #tab #sub-tab li:hover{
+			background: #fff;
+		}*/
+		#container #tab #sub-tab li.selected{
+			background: #fff;
+		}
+		#container #content{
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		#container #content img{
+			float: left;
+			/*display: none;*/
+		}
+		#container #content img.selected{
+			display: block;
+		}
+		#container #span{
+			position: absolute;
+			left: 50px;
+			bottom: 50px;
+			/*z-index: 10;*/
+		}
+		#container #span span{
+			display: block;
+			width: 30px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			margin-right: 5px;
+			background: #ccc;
+			float: left;
+			cursor: pointer;
+		}
+		#container #span span:hover{
+			background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="tab">
+			<ul id="sub-tab">
+				<li class="selected">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+		<div id="content">
+			<img src="cutImg/lun1.jpg" alt="1" class="selected">
+			<img src="cutImg/lun2.jpg" alt="2">
+			<img src="cutImg/lun3.jpg" alt="3">
+			<img src="cutImg/lun4.jpg" alt="4">
+			<img src="cutImg/lun5.jpg" alt="5">
+		</div>
+		<div id="span">
+			<span id="prev">&lt;</span>
+			<span id="next">&gt;</span>
+		</div>
+	</div>
+	<script src="jslib.js"></script>
+	<script>
+		var oContainer = document.getElementById("container");
+		var aImg = oContainer.getElementsByTagName("img");
+		var aLi = oContainer.getElementsByTagName("li");
+		var oUl = document.getElementById("sub-tab");
+		var oContent = document.getElementById("content");
+		var oSpan = document.getElementById("span");
+		var oPrev = document.getElementById("prev");
+		var oNext = document.getElementById("next");
+		var iNow = 0;
+		var timer;
+		oContent.style.width = aImg[0].offsetWidth * aImg.length + "px";
+
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].index = i;
+			aLi[i].onmouseover = function(){
+				changeImg(this.index);
+				iNow = this.index;
+			};
+		}
+		oPrev.onclick = function(){
+			iNow--;
+			if(iNow == -1){
+				iNow = 4;
+			}
+			changeImg(iNow);
+		};
+		oNext.onclick = function(){
+			iNow++;
+			iNow = iNow%aLi.length;
+			// console.log(iNow);
+			changeImg(iNow);
+		};
+		function changeImg(elem){
+			for(var i=0; i<aLi.length; i++){
+				aLi[i].className = "";
+				// aImg[i].className = "";
+			}
+			aLi[elem].className = "selected";
+			animate(oContent,{
+					left : - aImg[0].offsetWidth  * elem
+				},false);
+		}
+		timer = setInterval(function(){
+			oNext.onclick();
+		},2000);
+		oContainer.onmouseover = function(){
+			clearInterval(timer);
+		}
+		oContainer.onmouseout = function(){
+			timer = setInterval(function(){
+			oNext.onclick();
+		},2000);
+		}
+		// console.log(aImg.offsetWidth * iNow + "");
+		//利用事件委托，将事件转移到父元素上面统一管理
+		// oUl.addEventListener("mouseover",function(e){
+			//事件源
+		// 		var target = e.target || window.event.srcElement;
+		// 		var iNow = parseInt(target.innerHTML) - 1;
+		// 		for(var i=0; i<aImg.length; i++){
+		// 			aLi[i].className = "";
+		// 			aImg[i].className = "";
+		// 		}
+		// 		animate(oContent,{
+		// 			left : - aImg[0].offsetWidth * iNow
+		// 		});
+		// 		console.log(aImg[0].offsetWidth * iNow);
+		// 		aLi[iNow].className = "selected";
+				// aImg[iNow].className = "selected";
+				// console.log(aImg[iNow]);
+				// console.log("iNow=" + iNow);
+				// alert(target.innerHTML);
+			// },false);
+	</script>
+</body>
+</html>
