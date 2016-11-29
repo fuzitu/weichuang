@@ -113,10 +113,12 @@
 		var oSpan = document.getElementById("span");
 		var oPrev = document.getElementById("prev");
 		var oNext = document.getElementById("next");
+		var newImg = aImg[0].cloneNode();
+		oContent.appendChild(newImg);
 		var iNow = 0;
 		var timer;
 		oContent.style.width = aImg[0].offsetWidth * aImg.length + "px";
-
+		console.log(oContent);
 		for(var i=0; i<aLi.length; i++){
 			aLi[i].index = i;
 			aLi[i].onmouseover = function(){
@@ -127,13 +129,18 @@
 		oPrev.onclick = function(){
 			iNow--;
 			if(iNow == -1){
-				iNow = 4;
+				oContent.style.left = -(aImg.length - 1)*aImg[0].offsetWidth + "px";
+				iNow = aImg.length - 2;
 			}
 			changeImg(iNow);
 		};
 		oNext.onclick = function(){
-			iNow++;
-			iNow = iNow%aLi.length;
+			iNow++;//5
+			if(iNow == aImg.length){
+				oContent.style.left = 0;
+				iNow = 1;
+			}
+
 			// console.log(iNow);
 			changeImg(iNow);
 		};
@@ -142,7 +149,7 @@
 				aLi[i].className = "";
 				// aImg[i].className = "";
 			}
-			aLi[elem].className = "selected";
+			aLi[elem == aImg.length - 1 ?0:elem].className = "selected";
 			animate(oContent,{
 					left : - aImg[0].offsetWidth  * elem
 				},false);
@@ -152,12 +159,12 @@
 		},2000);
 		oContainer.onmouseover = function(){
 			clearInterval(timer);
-		}
+		};
 		oContainer.onmouseout = function(){
 			timer = setInterval(function(){
 			oNext.onclick();
 		},2000);
-		}
+		};
 		// console.log(aImg.offsetWidth * iNow + "");
 		//利用事件委托，将事件转移到父元素上面统一管理
 		// oUl.addEventListener("mouseover",function(e){
