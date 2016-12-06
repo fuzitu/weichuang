@@ -76,10 +76,10 @@
         console.log(oContent.innerHTML);
         oContent.style.width = aLi.length * (aLi[0].offsetWidth + 10) + "px";
         var speed = -2;
-//        console.log(oLeft);
+        //console.log(oLeft);
         setInterval(function(){
             oContent.style.left = oContent.offsetLeft + speed + "px";
-//            console.log(oContent.style.left);
+            //console.log(oContent.style.left);
             if(oContent.offsetLeft <= -oContent.offsetWidth / 2){
                 oContent.style.left = 0;
             }else if(oContent.offsetLeft >= 0){

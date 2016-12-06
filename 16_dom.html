@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom</title>
+</head>
+<body>
+    <div id="div1">
+        <p>pppppppppp</p>
+        <p>p1p1p1p1p1p1</p>
+    </div>
+<script>
+    //dom对象:文档对象模型(Document Object Model)
+    var oDiv = document.getElementById('div1');
+    console.log(oDiv.firstChild);   //IE下是p,其他标准浏览器下是#text
+    console.log(oDiv.firstElementChild);  //IE下不好使,其他标准浏览器是p
+    //像类似lastChild,nextSibling,previousSibling等都有这样的兼容性问题  dom3语法
+
+    console.log(oDiv.nodeName);   //大写的DIV,节点名字
+    console.log(oDiv.lastChild.nodeName);   //#text
+    console.log(oDiv.nodeValue);    //null
+    console.log(oDiv.lastChild.nodeValue); //就是空格
+    console.log(oDiv.children);  //没有兼容性问题,但是不是标准语法
+    //  offsetParent:最近的已定位的祖先元素,如果没有就是body
+    console.log(oDiv.getAttribute('id'));    //div1
+    oDiv.setAttribute('class','div2');  //设置class = div2,不能用{'class':'div2','id':'div1'}
+    console.log(oDiv.getAttribute('class'));  //div2
+
+
+
+
+
+    function next(elem){
+        do{
+            elem = elem.nextSibling;
+        }while(elem && elem.nodeType != 1);
+        return elem;
+    }
+    function prev(elem){
+        do{
+            elem = elem.previousSibling;
+        }while (elem && elem.nodeType != 1);
+    }
+    function first(elem){
+        elem = elem.firstChild;
+        if(elem && elem.nodeType == 1){
+            return elem;
+        }else{
+            next(elem);
+        }
+    }
+    //first函数优化
+    function firstAptimize(elem){
+        elem = elem.firstChild;
+        return elem && elem.nodeType ==1?elem:next(elem);
+    }
+    function last(elem){
+        elem = elem.lastChild;
+        if(elem = elem.nodeType ==1){
+            return elem;
+        }else{
+            prev(elem);
+        }
+    }
+    //last函数优化
+    function lastAptimize(elem){
+        elem = elem.lastChild;
+        return elem && elem.nodeType ==1?elem:prev(elem);
+    }
+</script>
+</body>
+</html>
