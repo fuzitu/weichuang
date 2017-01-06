@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装函数</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div id="div1">
+</div>
+<script>
+    var oDiv = document.getElementById('div1');
+
+    /*
+        函数作用:减少重复性操作
+
+    */
+
+
+    /*获取相应的对象*/
+    function getStyle(elem,prop){
+        if(elem.currentStyle){
+            return elem.currentStyle[prop];
+        }else if(getComputedStyle){
+            return getComputedStyle(elem,false)[prop];
+        }
+    }
+    var aa = getStyle(oDiv,'backgroundColor');
+    var bb = getStyle(oDiv,'background');
+    console.log(bb);
+    alert(aa);
+
+
+        /*  获取相应对象的另一种方法*/
+//    var a = oDiv.offsetWidth + 'px';
+//    alert(a);
+</script>
+
+</body>
+</html>

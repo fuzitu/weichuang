@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器</title>
+</head>
+<body>
+
+<script>
+    setTimeout(function(){
+        console.log(1);
+    }, 0);
+    console.log(2);
+    console.log(3);
+
+    var timer = setInterval(function(){}, 500);
+    clearInterval(timer);
+</script>
+</body>
+</html>
