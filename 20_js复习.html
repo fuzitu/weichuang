@@ -12,10 +12,17 @@
     <p id="p1">p1p1p1p1p1</p>
 </div>
 
+<input type="text" id="text">
 <script>
     var oDiv = document.getElementById('div1');
     var oP1 = document.getElementById('p1');
-    console.log(oDiv.children);//无兼容性问题
+    var oText = document.getElementById('text');
+    oText.onkeyup = function(e){
+        console.log(e.keyCode);
+    };
+
+
+    console.log(oDiv.children);//无兼容性问题,但不是标准语法
 
 
     console.log(oDiv.firstElementChild);
@@ -75,7 +82,7 @@
     //在指定元素之前插入
     var oP = document.createElement('p');
     oP.innerHTML = 'p2pp2p2p2p2p2';
-    oDiv.insertBefore(oP,oP1)
+    oDiv.insertBefore(oP,oP1);
 
 
 
