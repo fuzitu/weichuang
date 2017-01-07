@@ -28,6 +28,82 @@
     console.log(isNaN(2222));
     console.log(isNaN('1111'));
     console.log(isNaN('111d1'));
+
+    var text = 'javascript xxx';
+    console.log(text.slice(1,5));
+    console.log(text.split('v'));
+    console.log(text.substring(5));
+
+
+    /*
+    * 十六进制:0x
+    * 八进制:0
+    *二进制:0101
+    */
+
+
+    /*
+    * 基本数据类型:String,Number,Boolean,Undefined,Null ||没有浮点数
+    *var str = '';
+    *单引号表示字符常量,双引号表示字符串常量 ***
+    * 定义变量时,不加var视为全局变量
+    * */
+
+//    var str = 1;
+    //    console.log(typeof str);
+    //    console.log(str);
+    //    if(str){
+    //        console.log(111);
+    //    }else{
+    //        console.log(222);
+    //    }
+
+
+//    function aa(){
+    //        var str = 'xx';
+    //        if(str){
+    //            console.log(1);
+    //        }else{
+    //            console.log(2);
+    //        }
+    //    }
+    //    aa();
+    //    console.log(str);
+
+
+//    function aa(){
+//        str = 'xx';
+//        if(str){
+//            console.log(1);
+//        }else{
+//            console.log(2);
+//        }
+//    }
+//    aa();
+//    console.log(str);
+
+
+    var x = 1;
+    x = 'ddd';
+    console.log(x);
+
+
+    var a = true,b;
+    console.log(a || b);  //true
+    console.log(a && b);  //undefined
+
+
+//    e = e || window.event;
+//    console.log(e);
+
+    function aa(callback){
+        if(callback){
+            callback();
+        }
+        callback && callback();
+    }
+
+
 </script>
 
 </body>
