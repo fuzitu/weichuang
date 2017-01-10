@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码练习</title>
+</head>
+<body>
+
+
+        <script>
+//           var age = prompt('请输入年龄:','100');
+//           var age = prompt('请输入年龄:');
+//
+//           if(age >0 && age < 14){
+//                console.log('儿童');
+//           }else if(age > 14 && age < 24){
+//                console.log('青少年');
+//            }else if(age > 24 && age < 40){
+//                console.log('青年');
+//            }else if(age > 40 && age < 60){
+//                console.log('中年');
+//            }else{
+//                console.log('老年');
+//            }
+
+//            var age = prompt('请输入年龄');
+//            console.log(age);
+//            console.log(typeof age);
+
+
+            //编写:10!
+//            var sum=1;
+//            for(var i=1;i<=10; i++){
+////                sum = sum*i;
+//                sum *=i;
+//            }
+//            console.log(sum);
+
+
+
+
+            //函数方法
+            var result = 1;
+            function fn(a){
+                for(var i=1; i<=a;i++){
+                    result *=i;
+                }
+                return result;
+            }
+//            console.log(fn(10));
+
+
+
+
+            //编写1!+2!+3!+...+10!的结果
+            var sum = 0;
+            function fnAdd(b){
+                for(var i=1; i<= b; i++){
+                    console.log(fn(i));
+                    sum += fn(i);
+                    console.log(fn(i));
+
+
+//                    console.log('sum:'+sum);
+                }
+//                return sum;
+            }
+            console.log(fnAdd(5));
+
+
+        </script>
+</body>
+</html>
