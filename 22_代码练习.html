@@ -57,15 +57,14 @@
             function fnAdd(b){
                 for(var i=1; i<= b; i++){
                     console.log(fn(i));
-                    sum += fn(i);
-                    console.log(fn(i));
-
-
+                    sum = sum + fn(i);
 //                    console.log('sum:'+sum);
                 }
 //                return sum;
             }
-            console.log(fnAdd(5));
+
+            fnAdd(5);
+//            console.log(fnAdd(5));
 
 
         </script>
