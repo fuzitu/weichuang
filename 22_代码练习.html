@@ -219,17 +219,38 @@
 
 
 
-            var str = prompt('请输入一个字符串:');
-            function collectDigits(str){
-                var newStr = '';
-                for(var i=0; i<str.length; i++){
-                    if(str.charAt(i) >= '0' && str.charAt(i) <= '9'){
-                        newStr += str.charAt(i);
-                    }
+//            var str = prompt('请输入一个字符串:');
+//            function collectDigits(str){
+//                var newStr = '';
+//                for(var i=0; i<str.length; i++){
+//                    if(str.charAt(i) >= '0' && str.charAt(i) <= '9'){
+//                        newStr += str.charAt(i);
+//                    }
+//                }
+//                return newStr;
+//            }
+//            console.log(collectDigits(str));
+
+
+
+
+
+
+            function merge(s1,s2){
+                var len = s1.length > s2.length ? s1.length : s2.length;
+                var str = '';
+                for(var i=0; i<len; i++){
+                    str += s1.charAt(i) + s2.charAt(i);
                 }
-                return newStr;
+                console.log(str);
             }
-            console.log(collectDigits(str));
+            merge('123','abc');
+
+
+
+
+
+
 
 
 
