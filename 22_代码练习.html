@@ -166,16 +166,75 @@
 
 
 
-            var obj = {
-                name : '小红',
-                age : '20',
-                sex : 'F'
-            };
-            for(index in obj){
-                console.log(index);   //属性名字
-                console.log(obj[index]);
-//                console.log(obj.index);  //错误
+//            var obj = {
+//                name : '小红',
+//                age : '20',
+//                sex : 'F'
+//            };
+//            for(index in obj){
+//                console.log(index);   //属性名字
+//                console.log(obj[index]);
+////                console.log(obj.index);  //错误
+//            }
+
+
+
+//            var arr = new Array[10];
+//            console.log(arr);
+//
+//            substr();
+//            substring();
+
+
+
+
+//            //平方
+//            Math.pow(x,2);
+//
+//            //平方根
+//            Math.sqrt(x,2);
+//
+//
+//            //自然对数
+//            Math.log(x);
+
+
+
+//            var date = new Date();
+//
+//            date.getFullYear();   //年
+//            date.getMonth();      //月
+//            date.getDate();     //日
+//
+//            date.getHours();   //时
+//            date.getMinutes();   //分
+//            date.getSeconds();     //秒
+//            var str = '';
+//            document.write(date);
+//            document.write(date.toLocaleString());
+
+
+
+
+
+
+
+            var str = prompt('请输入一个字符串:');
+            function collectDigits(str){
+                var newStr = '';
+                for(var i=0; i<str.length; i++){
+                    if(str.charAt(i) >= '0' && str.charAt(i) <= '9'){
+                        newStr += str.charAt(i);
+                    }
+                }
+                return newStr;
             }
+            console.log(collectDigits(str));
+
+
+
+
+
 
 
 
