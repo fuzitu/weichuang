@@ -23,48 +23,58 @@
             height: 150px;
             margin: 10px;
             float: left;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-<div id="container">
-    <img src="照片墙/1.jpg" alt="">
-    <img src="照片墙/2.jpg" alt="">
-    <img src="照片墙/3.jpg" alt="">
-    <img src="照片墙/4.jpg" alt="">
-    <img src="照片墙/5.jpg" alt="">
-    <img src="照片墙/6.jpg" alt="">
-    <img src="照片墙/7.jpg" alt="">
-    <img src="照片墙/8.jpg" alt="">
-    <img src="照片墙/9.jpg" alt="">
-</div>
+    <div id="container">
+        <img src="照片墙/1.jpg" alt="">
+        <img src="照片墙/2.jpg" alt="">
+        <img src="照片墙/3.jpg" alt="">
+        <img src="照片墙/4.jpg" alt="">
+        <img src="照片墙/5.jpg" alt="">
+        <img src="照片墙/6.jpg" alt="">
+        <img src="照片墙/7.jpg" alt="">
+        <img src="照片墙/8.jpg" alt="">
+        <img src="照片墙/9.jpg" alt="">
+    </div>
+
+
 
     <script>
-
         /*
-        * 1.布局  float -- 定位
+        * 1.布局  float --> 定位
         */
-
         var oContainer = document.getElementById('container');
+//        console.log(oContainer);
         var aImg = oContainer.getElementsByTagName('img');
+//        console.log(aImg);
+        var zIndex = 1;
 
         for(var i=0; i<aImg.length; i++){
+//            aImg[i].position = 'absolute';
             aImg[i].style.left = aImg[i].offsetLeft + 'px';
             aImg[i].style.top = aImg[i].offsetTop + 'px';
         }
+
+
         for(var i=0; i<aImg.length; i++){
             aImg[i].position = 'absolute';
 //            aImg[i].style.margin = 0;
             drag(aImg[i]);
         }
 
+
         function drag(elem){
             elem.onmousedown = function(e){
+                console.log(1);
                 e = e || window.event;
                 var iDisX = e.clientX - elem.offsetLeft;
                 var iDisY = e.clientY - elem.offsetTop;
 
                 document.onmousemove = function(e){
+                    console.log(2);
                     e = e || window.event;
 
                     var iLeft = e.clientX - iDisX;
@@ -72,25 +82,38 @@
 
                     elem.style.left = iLeft + 'px';
                     elem.style.top = iTop + 'px';
+                    elem.style.zIndex = zIndex++;
+
+                    /*  碰撞检测*/
+                    for(var i=0; i<aImg.length; i++){
+                        if(aImg[i] == elem){
+                            continue;
+                        }
+                        checkCollde(elem,aImg[i]);
+                    }
+
 
                     /*  阻止默认行为  */
-                    return false;
+//                    return false;
                 };
 
-                document.onmouseup = function(){
+                document.onmouseup = function(e){
+                    e = e || window.event;
+                    console.log(3);
                     document.onmousemove = null;
-                }
-            }
+                };
+            };
         }
 
 
+        function checkCollde(elem,target){
+
+            var elemL =
 
 
 
 
-
-
-
+        }
     </script>
 </body>
 </html>
