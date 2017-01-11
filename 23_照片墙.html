@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #container{
+            width: 660px;
+            margin: 0 auto;
+        }
+        #container img{
+            width: 200px;
+            height: 150px;
+            margin: 10px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <img src="照片墙/1.jpg" alt="">
+    <img src="照片墙/2.jpg" alt="">
+    <img src="照片墙/3.jpg" alt="">
+    <img src="照片墙/4.jpg" alt="">
+    <img src="照片墙/5.jpg" alt="">
+    <img src="照片墙/6.jpg" alt="">
+    <img src="照片墙/7.jpg" alt="">
+    <img src="照片墙/8.jpg" alt="">
+    <img src="照片墙/9.jpg" alt="">
+</div>
+
+    <script>
+
+        /*
+        * 1.布局  float -- 定位
+        */
+
+        var oContainer = document.getElementById('container');
+        var aImg = oContainer.getElementsByTagName('img');
+
+        for(var i=0; i<aImg.length; i++){
+            aImg[i].style.left = aImg[i].offsetLeft + 'px';
+            aImg[i].style.top = aImg[i].offsetTop + 'px';
+        }
+        for(var i=0; i<aImg.length; i++){
+            aImg[i].position = 'absolute';
+        }
+
+
+
+
+    </script>
+</body>
+</html>
