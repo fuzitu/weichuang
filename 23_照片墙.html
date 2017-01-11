@@ -54,7 +54,39 @@
         }
         for(var i=0; i<aImg.length; i++){
             aImg[i].position = 'absolute';
+//            aImg[i].style.margin = 0;
+            drag(aImg[i]);
         }
+
+        function drag(elem){
+            elem.onmousedown = function(e){
+                e = e || window.event;
+                var iDisX = e.clientX - elem.offsetLeft;
+                var iDisY = e.clientY - elem.offsetTop;
+
+                document.onmousemove = function(e){
+                    e = e || window.event;
+
+                    var iLeft = e.clientX - iDisX;
+                    var iTop = e.clientY - iDisY;
+
+                    elem.style.left = iLeft + 'px';
+                    elem.style.top = iTop + 'px';
+
+                    /*  阻止默认行为  */
+                    return false;
+                };
+
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                }
+            }
+        }
+
+
+
+
+
 
 
 
