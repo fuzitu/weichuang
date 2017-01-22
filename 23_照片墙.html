@@ -105,10 +105,31 @@
             };
         }
 
-
+        //碰撞检测
+        /*
+        * elem : 拖拽元素
+        * target : 碰撞目标元素
+        * return true or false
+        *
+        * */
         function checkCollde(elem,target){
 
-            var elemL = ;
+            var elemL = elem.offsetLeft,
+                    elemR = elemL + elem.offsetWidth,
+                    elemT = elem.offsetTop,
+                    elemB = elemT + elem.offsetHeight;
+            var targetL = target.offsetLeft,
+                    targetR = targetL + target.offsetWidth,
+                    targetT = target.offsetTop,
+                    targetB = targetT + target.offsetHeight;
+            if(elemR < targetL || elemB < targetT || elemT > targetB || elemL > targetR){
+                //没碰撞上
+                return false;
+            }else{
+                //碰撞上了
+                return true;
+            }
+
 
 
 
