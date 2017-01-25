@@ -199,7 +199,7 @@
     var aImg = oContainer.getElementsByTagName('img');
 //    console.log(aImg);
     var zIndex = 1;
-    var aImgages = [];
+    var aImages = [];
 
 
     //给每个图片定位
@@ -241,18 +241,20 @@
 //                console.log(elem.offsetTop);
 
                 //碰撞检测
+                aImgages = [];
                 for(var i=0; i<aImg.length; i++){
                     if(aImg[i] == elem){
                         continue;
                     }
+//                    console.log(elem);
+//                    console.log(aImg[i]);
                     var isCol = checkCollide(elem,aImg[i]);
+                    //若碰撞上,就将aImg[i]加入到aImages数组里面
                     if(isCol){
-                        aImgages.push(aImg[i]);
-//                        console.log('碰撞上了');
-                    }else{
-//                        console.log('没碰撞上');
+                        aImages.push(aImg[i]);
                     }
                 }
+//                console.log(aImages);
 
 
             };
@@ -273,16 +275,16 @@
                 eRight = eLeft + elem.offsetWidth;
         var tLeft = target.offsetLeft,
                 tTop = target.offsetTop,
-                tBottom = eTop + elem.offsetHeight,
-                tRight = eLeft + elem.offsetWidth;
+                tBottom = tTop + elem.offsetHeight,
+                tRight = tLeft + elem.offsetWidth;
         if(eRight > tLeft || eBottom > tTop || tRight > eLeft || tBottom > eTop){
-            console.log('1');
+            console.log('撞上');
             return true;
         }else{
-            console.log('2');
+            console.log('没撞上');
             return false;
         }
-    };
+    }
 
 </script>
 
