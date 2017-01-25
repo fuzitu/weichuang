@@ -169,6 +169,9 @@
         width: 660px;
         margin: 0 auto;
     }
+    #container img.nearest{
+        border: 1px dotted black;
+    }
     #container img{
         width: 200px;
         height: 150px;
@@ -191,7 +194,7 @@
     <img src="照片墙/9.jpg" alt="">
 </div>
 
-<script src="jslib.js"></script>
+<script src="./jslib.js"></script>
 
 <script>
     var oContainer = document.getElementById('container');
@@ -200,6 +203,7 @@
 //    console.log(aImg);
     var zIndex = 1;
     var aImages = [];
+    var elemNearest;
 
 
     //给每个图片定位
@@ -217,10 +221,12 @@
         aImg[i].style.position = 'absolute';
         aImg[i].style.margin = '0';
         drag(aImg[i]);
+
+        aImg[i].pos = {
+            left : aImg[i].offsetLeft,
+            top : aImg[i].offsetTop
+        };
     }
-
-
-
 
     //获取拖拽图片的坐标,并更改图片位置到拖拽的位置
     function drag(elem){
@@ -241,7 +247,7 @@
 //                console.log(elem.offsetTop);
 
                 //碰撞检测
-                aImgages = [];
+                aImages = [];
                 for(var i=0; i<aImg.length; i++){
                     if(aImg[i] == elem){
                         continue;
@@ -251,22 +257,46 @@
                     var isCol = checkCollide(elem,aImg[i]);
                     //若碰撞上,就将aImg[i]加入到aImages数组里面
                     if(isCol){
+                        //碰撞上的元素加一个1px的红虚线,
+                        // 若未撞上则没有
+                        aImg[i].style.border = '1px dashed red';
                         aImages.push(aImg[i]);
+                    }else{
+                        aImg[i].style.border = '';
+                    }
+                    aImg[i].className = '';
+                    //距离检测
+                    if(aImages.length > 0){
+                        elemNearest = nearest(elem);
+                        elemNearest.className = 'nearest';
+                    }else{
+                        elemNearest = null;
+                    }
+
+                    return false;
+                }
+                console.log(aImages);
+
+                aImg[i].onmouseup = function(e){
+                    e = e || window.event;
+                    document.onomusemove = null;
+                    //elem elemNearest
+                    if(elemNearest){
+                        //left:elemNearest.pos.left,top:elemNearest.pos.top
+                        animate(elem,elemNearest.pos);
+                        animate(elemNearest,elem.pos);
+
+                        var pos = elemNearest.pos;
+                        elemNearest.pos = elem.pos;
+                        elem.pos = pos;
+                    }else{
+                        animate(elem,elem);
                     }
                 }
-//                console.log(aImages);
-
-
             };
 
-            document.onmouseup = function(e){
-                document.onomusemove = null;
-            }
         }
     }
-
-
-
     //碰撞检测函数
     function checkCollide(elem,target){
         var eLeft = elem.offsetLeft,
@@ -277,13 +307,36 @@
                 tTop = target.offsetTop,
                 tBottom = tTop + elem.offsetHeight,
                 tRight = tLeft + elem.offsetWidth;
-        if(eRight > tLeft || eBottom > tTop || tRight > eLeft || tBottom > eTop){
-            console.log('撞上');
-            return true;
-        }else{
-            console.log('没撞上');
+        if(eRight < tLeft || eBottom < tTop || tRight < eLeft || tBottom < eTop){
+//            console.log('没撞上');
             return false;
+        }else{
+//            console.log('撞上');
+            return true;
         }
+    }
+
+    //距离检测函数
+    function nearest(elem){
+        var minDis = 99999;
+        var index = -1;
+
+        var elemL = elem.offsetLeft;
+        var elemT = elem.offsetTop;
+        for(var i=0; i<aImages.length; i++){
+            var collL = aImages[i].offsetLeft,
+                collT = aImages[i].offsetTop,
+                x = elemL - collL,
+                y = elemT - collT;
+            var nearest = Math.sqrt(x * x + y * y);
+//            console.log(nearest);
+            if(nearest < minDis){
+                minDis = nearest;
+                index = i;
+            }
+        }
+//        aImages[index].style.border = '1px dashed black';
+        return aImages[index];
     }
 
 </script>
