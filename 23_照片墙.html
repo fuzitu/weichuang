@@ -169,9 +169,9 @@
         width: 660px;
         margin: 0 auto;
     }
-    #container img.nearest{
-        border: 1px dotted black;
-    }
+    /*#container img.nearest{*/
+        /*border: 1px dotted black;*/
+    /*}*/
     #container img{
         width: 200px;
         height: 150px;
@@ -220,6 +220,7 @@
     for(var i=0; i<aImg.length; i++){
         aImg[i].style.position = 'absolute';
         aImg[i].style.margin = '0';
+        //拖拽
         drag(aImg[i]);
 
         aImg[i].pos = {
@@ -227,7 +228,7 @@
             top : aImg[i].offsetTop
         };
     }
-
+    //拖拽函数
     //获取拖拽图片的坐标,并更改图片位置到拖拽的位置
     function drag(elem){
         elem.onmousedown = function(e){
@@ -264,39 +265,42 @@
                     }else{
                         aImg[i].style.border = '';
                     }
-                    aImg[i].className = '';
+//                    aImg[i].className = '';
+
                     //距离检测
                     if(aImages.length > 0){
                         elemNearest = nearest(elem);
-                        elemNearest.className = 'nearest';
+//                        elemNearest.className = 'nearest';
                     }else{
                         elemNearest = null;
                     }
-
-                    return false;
+//                    return false;
+                    console.log(aImages);
                 }
-                console.log(aImages);
 
-                aImg[i].onmouseup = function(e){
-                    e = e || window.event;
-                    document.onomusemove = null;
-                    //elem elemNearest
-                    if(elemNearest){
-                        //left:elemNearest.pos.left,top:elemNearest.pos.top
-                        animate(elem,elemNearest.pos);
-                        animate(elemNearest,elem.pos);
-
-                        var pos = elemNearest.pos;
-                        elemNearest.pos = elem.pos;
-                        elem.pos = pos;
-                    }else{
-                        animate(elem,elem);
-                    }
-                }
             };
+
+            document.onmouseup = function(){
+//                    e = e || window.event;
+                document.onomusemove = null;
+                document.onmouseup = null;
+                //elem elemNearest
+                if(elemNearest){
+                    //left:elemNearest.pos.left,top:elemNearest.pos.top
+                    animate(elem,elemNearest.pos);
+                    animate(elemNearest,elem.pos);
+
+                    var pos = elemNearest.pos;
+                    elemNearest.pos = elem.pos;
+                    elem.pos = pos;
+                }else{
+                    animate(elem,elem);
+                }
+            }
 
         }
     }
+
     //碰撞检测函数
     function checkCollide(elem,target){
         var eLeft = elem.offsetLeft,
