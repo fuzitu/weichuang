@@ -4,9 +4,104 @@
     <meta charset="UTF-8">
     <title>照片墙1</title>
 </head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    ul,ol{
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+    #container{
+        /*padding-top: 10px;*/
+        margin: 0 auto;
+        width: 660px;
+        /*position: relative;*/
+    }
+    #container img{
+        width: 200px;
+        height: 150px;
+        margin: 10px;
+        float: left;
+        cursor: pointer;
+    }
+</style>
 <body>
+<!--<ol>-->
+    <!--<li>a</li>-->
+    <!--<li>b</li>-->
+    <!--<li>c</li>-->
+    <!--<li>d</li>-->
+<!--</ol>-->
+<div id="container">
+    <img src="照片墙/1.jpg" alt="">
+    <img src="照片墙/2.jpg" alt="">
+    <img src="照片墙/3.jpg" alt="">
+    <img src="照片墙/4.jpg" alt="">
+    <img src="照片墙/5.jpg" alt="">
+    <img src="照片墙/6.jpg" alt="">
+    <img src="照片墙/7.jpg" alt="">
+    <img src="照片墙/8.jpg" alt="">
+    <img src="照片墙/9.jpg" alt="">
+</div>
+<script src="./jslib.js"></script>
+<script>
+    var oContainer = document.getElementById('container');
+    var aImg = oContainer.getElementsByTagName('img');
+    var zIndex = 1;
+    var aImages = [];
 
 
+    for(var i=0; i<aImg.length; i++){
+        aImg[i].top = aImg[i].offsetTop + 'px';
+        aImg[i].left = aImg[i].offsetLeft + 'px';
+    }
+    for(var i=0; i<aImg.length; i++){
+        aImg[i].style.position = 'relative';
+        aImg[i].style.float = '';
+//        aImg[i].style.margin = '0';
+        //拖拽函数
+        drag(aImg[i]);
+    }
 
+    function drag(elem){
+        elem.onmousedown = function(e){
+            e = e || window.event;
+            var iDisX = e.clientX - elem.offsetLeft;
+            var iDisY = e.clientY - elem.offsetTop;
+            document.onmousemove = function(e){
+                e = e || window.event;
+                var iDisAX = e.clientX - iDisX;
+                var iDisAY = e.clientY - iDisY;
+                elem.style.left = iDisAX + 'px';
+                elem.style.top = iDisAY + 'px';
+                elem.style.zIndex = zIndex++;
+
+                //碰撞检测
+                aImages = [];
+                for(var i=0; i<aImg.length; i++){
+                    if(aImg[i] == elem){
+                        continue;
+                    }
+//                    console.log(elem);
+//                    console.log(aImg[i]);
+                    var isCol = checkCollide(elem,aImg[i]);
+                    //若碰撞上,就将aImg[i]加入到aImages数组里面
+                    if(isCol){
+                        //碰撞上的元素加一个1px的红虚线,
+                        // 若未撞上则没有
+                        aImg[i].style.border = '1px dashed red';
+                        aImages.push(aImg[i]);
+                    }else{
+                        aImg[i].style.border = '';
+                    }
+//                    aImg[i].className = '';
+            }
+        }
+    }
+</script>
 </body>
 </html>
