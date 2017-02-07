@@ -82,6 +82,7 @@
 
                 //碰撞检测
                 aImages = [];
+                //检测到自己直接跳过
                 for(var i=0; i<aImg.length; i++){
                     if(aImg[i] == elem){
                         continue;
@@ -98,8 +99,79 @@
                     }else{
                         aImg[i].style.border = '';
                     }
-//                    aImg[i].className = '';
+                    //aImg[i].className = '';
+
+                    //距离检测
+                    if(aImages.length > 0){
+                        elemNearest = nearest(elem);
+                        //elemNearest.className = 'nearest';
+                    }else{
+                        elemNearest = null;
+                    }
+                    //return false;
+                    console.log(aImages);
             }
+        };
+            document.onmouseup = function(){
+//                    e = e || window.event;
+                document.onomusemove = null;
+                document.onmouseup = null;
+                //elem elemNearest
+                if(elemNearest){
+                    //left:elemNearest.pos.left,top:elemNearest.pos.top
+                    animate(elem,elemNearest.pos);
+                    animate(elemNearest,elem.pos);
+
+                    var pos = elemNearest.pos;
+                    elemNearest.pos = elem.pos;
+                    elem.pos = pos;
+                }else{
+                    animate(elem,elem);
+                }
+            }
+
+        };
+
+        //碰撞检测函数
+        function checkCollide(elem,target){
+            var eLeft = elem.offsetLeft,
+                    eTop = elem.offsetTop,
+                    eBottom = eTop + elem.offsetHeight,
+                    eRight = eLeft + elem.offsetWidth;
+            var tLeft = target.offsetLeft,
+                    tTop = target.offsetTop,
+                    tBottom = tTop + elem.offsetHeight,
+                    tRight = tLeft + elem.offsetWidth;
+            if(eRight < tLeft || eBottom < tTop || tRight < eLeft || tBottom < eTop){
+//            console.log('没撞上');
+                return false;
+            }else{
+//            console.log('撞上');
+                return true;
+            }
+        }
+
+        //距离检测函数
+        function nearest(elem){
+            var minDis = 99999;
+            var index = -1;
+
+            var elemL = elem.offsetLeft;
+            var elemT = elem.offsetTop;
+            for(var i=0; i<aImages.length; i++){
+                var collL = aImages[i].offsetLeft,
+                        collT = aImages[i].offsetTop,
+                        x = elemL - collL,
+                        y = elemT - collT;
+                var nearest = Math.sqrt(x * x + y * y);
+//            console.log(nearest);
+                if(nearest < minDis){
+                    minDis = nearest;
+                    index = i;
+                }
+            }
+//        aImages[index].style.border = '1px dashed black';
+            return aImages[index];
         }
     }
 </script>
