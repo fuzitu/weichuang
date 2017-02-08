@@ -31,7 +31,7 @@
     }
 </style>
 <body>
-
+<h1>aaaaaaaaaaaaaaaaaaaaaaaa</h1>
 <ul>
     <li>001</li>
     <li>002</li>
@@ -48,18 +48,19 @@
 <script>
     var oGo = document.getElementById('div1');
     oGo.onclick = function(){
-
-        window.scrollTo(0,0);
-        //标准浏览器
+//        window.scrollTo(0,200);   //(X轴距离,Y轴距离);但距离不一定就是**px,有一定的比例
+        //标准浏览器获取滚动条的距离
 //        var ITop = document.body.scrollTop;
-
-        //IE浏览器
+        //IE浏览器获取滚动条的距离
 //        var IETop = document.documentElement.scrollTop;
+
         var iTop = document.body.scrollTop || document.documentElement.scrollTop;
-        setInterval(function(){
-            window.scrollTo(0,iTop-+);
-        })
-        console.log();
+        var timer = setInterval(function(){
+            window.scrollTo(0,iTop-=20);
+            if(iTop <=0){
+                clearInterval(timer);
+            }
+        },50);
     }
 </script>
 </body>
