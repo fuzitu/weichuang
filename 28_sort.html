@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sort</title>
+</head>
+<body>
+
+
+<script>
+    function mySort(){
+        var tags = new Array();
+        for(var i=0; i<arguments.length; i++){
+//            tags.push(arguments[i]);
+            tags[i] = arguments[i];
+        }
+        tags.sort(function(a,b){
+           return a-b;
+        });
+        return tags;
+    }
+    var result = mySort(12,45,7,24,13,86,455,683);
+    console.log(result);
+</script>
+</body>
+</html>

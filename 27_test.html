@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+
+<script>
+//    var foo ={
+//        att:1
+//    };
+//    foo('att');
+
+
+
+//        var d = new Date();
+//        setTimeout(function(){
+//            console.log(d);
+//            console.log('时间差' + (new Date() - d));
+//        },0);
+//        console.log(new Date());
+
+
+
+//    for(var i=1; i<=3; i++){
+//        setTimeout(function(){
+//            console.log(i);
+//        },0);
+//    }
+    //  4  4  4
+
+
+
+        var a,b;
+        (function(){
+            console.log(a);
+            console.log(b);
+            var a=b=3;
+            console.log(a);
+            console.log(b);
+        })();
+
+    console.log(a);
+    console.log(b);
+
+    // undefined  undefined  3  3  undefined  3
+
+
+
+</script>
+</body>
+</html>
