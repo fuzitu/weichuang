@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lookString</title>
+</head>
+<body>
+
+
+<script>
+
+
+    //在一个字符串中找到第一个只出现一次的字符,如输入abaccdeff,则输出b
+    function lookString(str){
+        var arr = str.split('').sort();
+        var arrA = [];
+        for(var i=0; i<arr.length; i++){
+            if(arr[i] != arr[arr[i+1] && arr[i] != arr[i-1]]){
+                arrA.push(arr[i]);
+            }
+        }
+        console.log(arrA);
+    }
+
+    lookString('asfkgnsdgwrsd');
+
+//    var str = 'qw5wzxf57df4546g';
+//    var arr = str.split('').sort();
+//    console.log(arr);
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

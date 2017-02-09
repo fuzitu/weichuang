@@ -15,11 +15,20 @@
 
     var str = 'this is js coe aaaaa bbbbb egqet';
     var arr = str.split(' ');
+    var min = arr[0].length;
+    var max = arr[0].length;
+    var maxWord = arr[0];
+    var minWord = arr[0];
     for(var i=0; i<arr.length; i++){
-        var obj = {};
-        obj.length = arr[i].length;
-        obj.index = i;
+        if(min > arr[i].length){
+            min = arr[i].length;
+            minWord = arr[i];
+        }else{
+            max = arr[i].length;
+            maxWord = arr[i];
+        }
     }
+    console.log(min,minWord,max,maxWord);
 
 
 
